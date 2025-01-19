@@ -69,3 +69,7 @@ rosa-negra-ipluso/
 ├── requirements.txt
 └── run.py
 ```
+
+## Preview
+
+<img src="app/assets/preview.png">
