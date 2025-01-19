@@ -1,5 +1,6 @@
 import customtkinter as ctk
 import os
+from PIL import Image, ImageTk
 from app.views.index import IndexPage
 from app.views.product import ProductPage
 from app.views.cart import CartPage
@@ -33,22 +34,30 @@ class WineApp(ctk.CTk):
         self.header = ctk.CTkFrame(self, height=50)
         self.header.pack(side="top", fill="x", pady=16, padx=16)
 
-        title_label = ctk.CTkLabel(self.header, text="Rosa Negra", font=("Arial", 20))
+        title_label = ctk.CTkLabel(self.header, text="Rosa Negra", font=("Arial", 32))
         title_label.pack(side="left", padx=10)
 
         button_frame = ctk.CTkFrame(self.header)
         button_frame.pack(side="right", padx=10)
 
-        home_button = ctk.CTkButton(button_frame, text="Home", command=self.show_index_page)
+        home_button = ctk.CTkButton(button_frame, text="Home", command=self.show_index_page, font=("Arial", 16, "bold"), width=48)
         home_button.pack(side="left", padx=5)
 
-        wines_button = ctk.CTkButton(button_frame, text="Vinhos", command=self.show_product_page)
+        wines_button = ctk.CTkButton(button_frame, text="Vinhos", command=self.show_product_page, font=("Arial", 16, "bold"), width=48)
         wines_button.pack(side="left", padx=5)
 
-        cart_button = ctk.CTkButton(button_frame, text="Carrinho", command=self.show_cart_page)
+        cart_icon_path = os.path.join(os.path.dirname(__file__), 'assets', 'cart-icon.png')
+        cart_icon_image = ImageTk.PhotoImage(Image.open(cart_icon_path).resize((20, 20)))
+        
+        cart_button = ctk.CTkButton(button_frame, image=cart_icon_image, text="", command=self.show_cart_page, width=30)
+        cart_button.image = cart_icon_image
         cart_button.pack(side="left", padx=5)
+        
+        user_icon_path = os.path.join(os.path.dirname(__file__), 'assets', 'user-icon.png')
+        user_icon_image = ImageTk.PhotoImage(Image.open(user_icon_path).resize((20, 20)))
 
-        login_button = ctk.CTkButton(button_frame, text="Login", command=self.show_login_page)
+        login_button = ctk.CTkButton(button_frame, image=user_icon_image, text="", command=self.show_login_page, width=30)
+        login_button.image = user_icon_image
         login_button.pack(side="left", padx=5)
 
     def create_footer(self):
