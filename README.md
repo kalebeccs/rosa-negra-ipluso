@@ -1,3 +1,3 @@
-<img src="img/icon.png">
+<img src="app/assets/icon.ico" width="170">
 
 # Rosa Negra
