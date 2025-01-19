@@ -1,4 +1,8 @@
 import sqlite3
+import users
+
+
+from data import USERS, WINES, STOCK, PURCHASES, PURCHASE_ITEMS
 
 conn = sqlite3.connect('rosa_negra.db')
 cursor = conn.cursor()
@@ -59,10 +63,41 @@ CREATE TABLE IF NOT EXISTS purchase_items(
     fk_purchase INTEGER NOT NULL,
     fk_wine INTEGER NOT NULL,
     quantity INTEGER NOT NULL,
-    FOREIGN KEY(fk_wine) REFERENCES wine(pk_wine),
+    FOREIGN KEY(fk_wine) REFERENCES wines(pk_wine),
     FOREIGN KEY(fk_purchase) REFERENCES purchases(pk_purchase)
 )  
 ''')
 
+for wine in WINES:
+    cursor.execute('''
+        INSERT INTO wines (brand, name, price, type, alcohol, year, region, description)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (wine['brand'], wine['name'], wine['price'], wine['type'], wine['alcohol'],
+          wine['year'], wine['region'], wine['description']))
+
+
+for stock in STOCK:
+    cursor.execute('''
+        INSERT INTO stocks (fk_wine, movement, quantity, fk_user, reason)
+        VALUES (?, ?, ?, ?, ?)
+    ''', (stock['fk_wine'], stock['movement'], stock['quantity'], stock['fk_user'], stock['reason']))
+
+
+for purchase in PURCHASES:
+    cursor.execute('''
+        INSERT INTO purchases (fk_user, total_value)
+        VALUES (?, ?)
+    ''', (purchase['fk_user'], purchase['total_value']))
+
+
+for item in PURCHASE_ITEMS:
+    cursor.execute('''
+        INSERT INTO purchase_items (fk_purchase, fk_wine, quantity)
+        VALUES (?, ?, ?)
+    ''', (item['fk_purchase'], item['fk_wine'], item['quantity']))
+
 conn.commit()
 conn.close()
+
+print("Base de dados inicializada com sucesso!")
+
