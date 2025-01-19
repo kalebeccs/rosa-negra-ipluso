@@ -1,7 +1,7 @@
 import customtkinter as ctk
 import os
 from app.views.index import IndexPage
-from app.views.product import ProductPage
+from app.views.products import ProductPage
 from app.views.cart import CartPage
 from app.views.login import LoginPage
 from app.views.register import RegisterPage
@@ -18,7 +18,7 @@ class WineApp(ctk.CTk):
         self.iconbitmap(os.path.join(os.path.dirname(__file__), 'assets', 'icon.ico'))
         self.title("Tela Inicial - Rosa Negra")
         
-        ctk.set_appearance_mode("system")
+        ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("blue")
 
         self.create_header()
