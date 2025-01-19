@@ -1,0 +1,4 @@
+__pycache__/
+.venv/
+lib/
+rosa_negra.db
