@@ -1,5 +1,5 @@
 from app.views.index import IndexPage
-from app.views.product import ProductPage
+from app.views.products import ProductPage
 from app.views.cart import CartPage
 from app.views.login import LoginPage
 from app.views.register import RegisterPage
@@ -8,16 +8,37 @@ from app.views.dashboard import DashboardPage
 from app.views.product_management import ProductManagementPage
 from app.views.user_management import UserManagementPage
 from app.views.purchase_management import PurchaseManagementPage
+import logging
 
 class Router:
+    """
+    Router class to manage navigation between different pages of the application.
+
+    Attributes:
+        app (WineApp): Instance of the main application.
+        pages (dict): Dictionary containing instances of the pages.
+
+    Methods:
+        initialize_pages(): Initializes all pages and stores them in the pages dictionary.
+        navigate_to(page_name): Displays the requested page by name.
+        show_index_page(): Displays the index page.
+        show_product_page(): Displays the product page.
+        show_cart_page(): Displays the cart page.
+        show_login_page(): Displays the login page.
+        show_register_page(): Displays the register page.
+        show_profile_page(): Displays the profile page.
+        show_dashboard_page(): Displays the dashboard page.
+        show_product_management_page(): Displays the product management page.
+        show_user_management_page(): Displays the user management page.
+        show_purchase_management_page(): Displays the purchase management page.
+    """
     def __init__(self, app):
         self.app = app
         self.pages = {}
         
     def initialize_pages(self):
-        # Inicializar as páginas
         self.pages = {
-            "index": IndexPage(self.app.content),
+            "index": IndexPage(self.app.content, self.app),
             "product": ProductPage(self.app.content),
             "cart": CartPage(self.app.content),
             "login": LoginPage(self.app.content),
@@ -31,16 +52,17 @@ class Router:
 
     def navigate_to(self, page_name):
         """
-        Exibe a página solicitada pelo nome.
+        Displays the requested page by name.
+
+        :param page_name: Name of the page to be displayed.
         """
         if page_name not in self.pages:
-            raise ValueError(f"Page '{page_name}' does not exist.")
+            logging.error(f"Page '{page_name}' does not exist.")
         
-        self.app.clear_frame()  # Limpar o conteúdo atual
-        self.app.title(f"{page_name.capitalize()} - Rosa Negra")  # Atualizar título
+        self.app.clear_frame()
+        self.app.title(f"{page_name.capitalize()} - Rosa Negra")
         self.pages[page_name].pack(fill="both", expand=True)
 
-    # Métodos específicos para facilitar o acesso a páginas principais
     def show_index_page(self):
         self.navigate_to("index")
 
