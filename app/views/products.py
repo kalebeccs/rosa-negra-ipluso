@@ -1,4 +1,5 @@
 import customtkinter as ctk
+import logging
 from src.models.wines import get_wines_by_type
 
 class ProductPage(ctk.CTkFrame):
@@ -7,7 +8,7 @@ class ProductPage(ctk.CTkFrame):
         self.master = master
 
         # Título da página
-        title_label = ctk.CTkLabel(self, text="Product Page", font=("Arial", 24, "bold"))
+        title_label = ctk.CTkLabel(self, text="Página de produtos", font=("Arial", 24, "bold"))
         title_label.pack(pady=20)
 
         # Frame para vinhos de mesa
@@ -44,15 +45,36 @@ class ProductPage(ctk.CTkFrame):
 
     def add_products(self, frame, products):
         for product in products:
+            product_frame = ctk.CTkFrame(frame, fg_color="#242424", corner_radius=10)
+            product_frame.pack(fill="x", padx=10, pady=5)
+
             product_info = (
-                f"Brand: {product['brand']}\n"
-                f"Name: {product['name']}\n"
-                f"Price: ${product['price']:.2f}\n"
-                f"Type: {product['type']}\n"
-                f"Alcohol: {product['alcohol']}%\n"
-                f"Year: {product['year']}\n"
-                f"Region: {product['region']}\n"
-                f"Description: {product['description']}\n"
+                f"Marca: {product['brand']}\n"
+                f"Nome: {product['name']}\n"
+                f"Valor: €{product['price']:.2f}\n"
+                f"Tipo: {product['type']}\n"
+                f"Álcool: {product['alcohol']}\n"
+                f"Ano: {product['year']}\n"
+                f"Região: {product['region']}\n"
+                f"Descrição: {product['description']}\n"
             )
-            product_label = ctk.CTkLabel(frame, text=product_info, font=("Arial", 16), justify="left")
+            product_label = ctk.CTkLabel(product_frame, text=product_info, font=("Arial", 16), justify="left")
             product_label.pack(anchor="w", padx=10, pady=5)
+
+            add_to_cart_button = ctk.CTkButton(
+                product_frame, 
+                text="Adicionar ao carrinho", 
+                command=lambda p=product: self.add_to_cart(p),
+                font=("Arial", 12, "bold"),
+                fg_color="#C9A234",
+                hover_color="#A88227",
+                text_color="#292929"
+            )
+            add_to_cart_button.pack(anchor="e", padx=10, pady=5)
+
+    def add_to_cart(self, product):
+        # Assuming you have a cart attribute in your class
+        if not hasattr(self, 'cart'):
+            self.cart = []
+        self.cart.append(product)
+        logging.info(f"Adicionado ao carrinho: {product['type']} {product['name']}")
