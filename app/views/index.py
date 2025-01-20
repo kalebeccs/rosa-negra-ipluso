@@ -21,11 +21,13 @@ class IndexPage(ctk.CTkFrame):
         text_label = ctk.CTkLabel(
             main_content_frame,
             text=(
-                "Cada taça de vinho é um convite para uma jornada sensorial."
-                "Do aroma delicado das frutas ao corpo rico e persistente no paladar,"
-                "nossos vinhos foram selecionados para transformar qualquer ocasião em uma celebração."
-                "Explore nossa galeria e descubra o vinho perfeito para cada momento." 
-                "Brindemos juntos à tradição, ao sabor e à arte de viver bem!"
+                "O vinho é muito mais do que uma bebida: é uma expressão de história, "
+                "cultura e paixão. Cada garrafa carrega consigo a alma do terroir de onde foi produzida, "
+                "combinando a riqueza do solo, o clima único e o cuidado dos viticultores que transformam"
+                "uvas em verdadeiras obras de arte."
+                "Nosso catálogo celebra a diversidade dos vinhos, abrangendo desde os clássicos tintos encorpados"
+                " até os delicados brancos e os vibrantes rosés. Além disso, oferecemos opções exclusivas de vinhos frizantes,"
+                " verdes e reservas, cada um cuidadosamente selecionado para proporcionar uma experiência sensorial única."
             ),
             font=("Arial", 14),
             text_color="white",
@@ -48,10 +50,10 @@ class IndexPage(ctk.CTkFrame):
         categories_frame.pack(pady=20, padx=40, fill="x")
 
         categories = [
-            {"name": "Signature", "image": "signature-tinto.png", "description": "Vinhos exclusivos e de alta qualidade."},
-            {"name": "Reserva", "image": "reserva-tinto.png", "description": "Vinhos envelhecidos para um sabor único."},
-            {"name": "Mesa", "image": "mesa-tinto.png", "description": "Vinhos para o dia a dia, acessíveis e saborosos."},
-            {"name": "Exotico", "image": "exotic-branco.png", "description": "Vinhos com sabores exóticos e diferenciados."}
+            {"name": "Signature", "image": "signature-tinto.png", "description": "Vinhos autorais, refinados e exclusivos, ideais para aqueles que buscam sofisticação."},
+            {"name": "Reserva", "image": "reserva-tinto.png", "description": "Produzidos com as melhores uvas e envelhecidos com perfeição, entregando sabor e complexidade excepcionais."},
+            {"name": "Mesa", "image": "mesa-tinto.png", "description": "Versáteis e acessíveis, perfeitos para acompanhar os momentos do dia a dia."},
+            {"name": "Exotico", "image": "exotic-branco.png", "description": "Opções inusitadas, como verdes e frizantes, que surpreendem o paladar com frescor e originalidade."}
         ]
 
         for i, category in enumerate(categories):
