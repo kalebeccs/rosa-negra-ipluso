@@ -8,60 +8,79 @@ class ProductPage(ctk.CTkFrame):
         super().__init__(master)
         self.master = master
 
+        # Frame principal para centralizar tudo
+        main_frame = ctk.CTkFrame(self, fg_color="transparent")
+        main_frame.pack(expand=True, fill="both")
+
         # Título da página
-        title_label = ctk.CTkLabel(self, text="Página de produtos", font=("Arial", 24, "bold"))
+        title_label = ctk.CTkLabel(
+            main_frame, 
+            text="Página de Produtos", 
+            font=("Arial", 28, "bold"),
+            text_color="white"
+        )
         title_label.pack(pady=20)
 
-        # Frame para vinhos de mesa
-        table_wines_frame = ctk.CTkFrame(self, fg_color="transparent")
-        table_wines_frame.pack(pady=10, padx=20, fill="x")
-        table_wines_label = ctk.CTkLabel(table_wines_frame, text="Vinhos de Mesa", font=("Arial", 20, "bold"))
-        table_wines_label.pack(anchor="w")
-        table_wines = get_wines_by_type("Mesa")
-        self.add_products(table_wines_frame, table_wines)
+        # Criar as seções de produtos
+        self.create_section(main_frame, "Vinhos de Mesa", "Mesa")
+        self.create_section(main_frame, "Vinhos Exóticos", "Exotico")
+        self.create_section(main_frame, "Vinhos Reserva", "Reserva")
+        self.create_section(main_frame, "Vinhos Signature", "Signature")
 
-        # Frame para vinhos exóticos
-        exotic_wines_frame = ctk.CTkFrame(self, fg_color="transparent")
-        exotic_wines_frame.pack(pady=10, padx=20, fill="x")
-        exotic_wines_label = ctk.CTkLabel(exotic_wines_frame, text="Vinhos Exóticos", font=("Arial", 20, "bold"))
-        exotic_wines_label.pack(anchor="w")
-        exotic_wines = get_wines_by_type("Exotico")
-        self.add_products(exotic_wines_frame, exotic_wines)
+    def create_section(self, parent, section_title, wine_type):
+        # Frame da seção
+        section_frame = ctk.CTkFrame(parent, fg_color="transparent")
+        section_frame.pack(pady=20, padx=20, fill="x")
 
-        # Frame para vinhos reserva
-        reserve_wines_frame = ctk.CTkFrame(self, fg_color="transparent")
-        reserve_wines_frame.pack(pady=10, padx=20, fill="x")
-        reserve_wines_label = ctk.CTkLabel(reserve_wines_frame, text="Vinhos Reserva", font=("Arial", 20, "bold"))
-        reserve_wines_label.pack(anchor="w")
-        reserve_wines = get_wines_by_type("Reserva")
-        self.add_products(reserve_wines_frame, reserve_wines)
+        # Título da seção
+        section_label = ctk.CTkLabel(
+            section_frame,
+            text=section_title,
+            font=("Arial", 22, "bold"),
+            text_color="#FFFFFF",
+        )
+        section_label.pack(anchor="center", pady=10)  # Centralizar o título
 
-        # Frame para vinhos signature
-        signature_wines_frame = ctk.CTkFrame(self, fg_color="transparent")
-        signature_wines_frame.pack(pady=10, padx=20, fill="x")
-        signature_wines_label = ctk.CTkLabel(signature_wines_frame, text="Vinhos Signature", font=("Arial", 20, "bold"))
-        signature_wines_label.pack(anchor="w")
-        signature_wines = get_wines_by_type("Signature")
-        self.add_products(signature_wines_frame, signature_wines)
+        # Frame para os produtos
+        products_frame = ctk.CTkFrame(section_frame, fg_color="transparent")
+        products_frame.pack(anchor="center", padx=10, pady=10)
 
-    def add_products(self, frame, products):
-        for product in products:
-            product_frame = ctk.CTkFrame(frame, fg_color="#242424", corner_radius=10)
-            product_frame.pack(fill="x", padx=10, pady=5)
+        # Adicionar os produtos em uma grade
+        self.add_products(products_frame, wine_type)
 
-            product_info = (
-                f"Marca: {product['brand']}\n"
-                f"Nome: {product['name']}\n"
-                f"Valor: €{product['price']:.2f}\n"
-                f"Tipo: {product['type']}\n"
-                f"Álcool: {product['alcohol']}\n"
-                f"Ano: {product['year']}\n"
-                f"Região: {product['region']}\n"
-                f"Descrição: {product['description']}\n"
+    def add_products(self, frame, wine_type):
+        # Configurar grade
+        products = get_wines_by_type(wine_type)
+        columns = 3  # Número de colunas na grade
+        for i, product in enumerate(products):
+            # Frame para cada produto
+            product_frame = ctk.CTkFrame(
+                frame, 
+                fg_color="#242424", 
+                corner_radius=8, 
+                border_width=1, 
+                border_color="#C9A234"
             )
-            product_label = ctk.CTkLabel(product_frame, text=product_info, font=("Arial", 16), justify="left")
-            product_label.pack(anchor="w", padx=10, pady=5)
+            product_frame.grid(row=i // columns, column=i % columns, padx=15, pady=15, sticky="nsew")
 
+            # Informações do produto
+            product_info = (
+                f"Nome: {product['name']}\n"
+                f"Tipo: {product['type']}\n"
+                f"Valor: €{product['price']:.2f}\n"
+                f"Álcool: {product['alcohol']}%\n"
+                f"Região: {product['region']}\n"
+            )
+            product_label = ctk.CTkLabel(
+                product_frame,
+                text=product_info,
+                font=("Arial", 14),
+                justify="left",
+                text_color="#FFFFFF",
+            )
+            product_label.pack(anchor="center", padx=10, pady=5)  # Centralizar texto
+
+            # Botão "Adicionar ao Carrinho"
             add_to_cart_button = ctk.CTkButton(
                 product_frame, 
                 text="Adicionar ao carrinho", 
@@ -71,8 +90,12 @@ class ProductPage(ctk.CTkFrame):
                 hover_color="#A88227",
                 text_color="#292929"
             )
-            add_to_cart_button.pack(anchor="e", padx=10, pady=5)
+            add_to_cart_button.pack(anchor="center", pady=10)  # Centralizar botão
+
+        # Ajustar as colunas para expandirem uniformemente
+        for col in range(columns):
+            frame.grid_columnconfigure(col, weight=1)
 
     def add_to_cart(self, product):
         add_to_cart(product, 1)
-        logging.info(f"Added to cart: {product['type']} {product['name']}")
+        logging.info(f"Adicionado ao carrinho: {product['type']} {product['name']}")
