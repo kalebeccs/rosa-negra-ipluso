@@ -39,12 +39,13 @@ class IndexPage(ctk.CTkFrame):
         text_label = ctk.CTkLabel(
             main_content_frame,
             text=(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu diam lacus, "
-                "in hac habitasse platea dictumst. Suspendisse cursus efficitur mauris quis placerat. "
-                "Nam vitae dui sit amet lacus tempus porttitor eu quis odio. Donec diam turpis, "
-                "venenatis id odio nec, ullamcorper ornare nibh."
+                "Each glass of wine is an invitation to a sensorial journey." 
+                "From the delicate aroma of fruits to the rich and persistent body on the palate, "
+                "our wines have been selected to transform any occasion into a celebration."
+                "Explore our gallery and discover the perfect wine for every moment." 
+                "Let's toast together to tradition, flavor and the art of living well!"
             ),
-            font=("Arial", 14),
+            font=("Arial", 15),
             text_color="black",
             wraplength=500,
             justify="left",
