@@ -50,10 +50,10 @@ class IndexPage(ctk.CTkFrame):
         categories_frame.pack(pady=20, padx=40, fill="x")
 
         categories = [
-            {"name": "Signature", "image": "signature-tinto.png", "description": "Vinhos autorais, refinados e exclusivos, ideais para aqueles que buscam sofisticação."},
-            {"name": "Reserva", "image": "reserva-tinto.png", "description": "Produzidos com as melhores uvas e envelhecidos com perfeição, entregando sabor e complexidade excepcionais."},
-            {"name": "Mesa", "image": "mesa-tinto.png", "description": "Versáteis e acessíveis, perfeitos para acompanhar os momentos do dia a dia."},
-            {"name": "Exotico", "image": "exotic-branco.png", "description": "Opções inusitadas, como verdes e frizantes, que surpreendem o paladar com frescor e originalidade."}
+            {"name": "Signature", "image": "card-signature.png", "description": "Vinhos autorais, refinados e exclusivos, ideais para aqueles que buscam sofisticação."},
+            {"name": "Reserva", "image": "card-reserva.png", "description": "Produzidos com as melhores uvas e envelhecidos com perfeição, entregando sabor e complexidade excepcionais."},
+            {"name": "Mesa", "image": "card-mesa.png", "description": "Versáteis e acessíveis, perfeitos para acompanhar os momentos do dia a dia."},
+            {"name": "Exotico", "image": "card-exotic.png", "description": "Opções inusitadas, como verdes e frizantes, que surpreendem o paladar com frescor e originalidade."}
         ]
 
         for i, category in enumerate(categories):
