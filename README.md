@@ -1,12 +1,6 @@
-# 🌹 Rosa Negra iPluso
-
 <img src="app\assets\logo.png" width="170">
 
-## Overview
-
 Rosa Negra iPluso is an interactive application for managing and exploring wines and bottles in a unique way. This project combines modern technology with the sophistication of the wine world, providing a rich and functional experience.
-
----
 
 ## 🏗️ Technologies Used
 
@@ -14,8 +8,6 @@ Rosa Negra iPluso is an interactive application for managing and exploring wines
 - **CustomTkinter**: Framework for modern graphical interfaces.
 - **Pillow (PIL)**: Image manipulation.
 - **Additional Libraries**: `bcrypt`, `darkdetect`, among others.
-
----
 
 ## 🚀 Installation and Usage
 
@@ -54,8 +46,6 @@ Follow the steps below to set up the project locally:
    python run.py
    ```
 2. The application will start, and you can navigate through the different sections using the provided interface.
-
----
 
 ## 📁 Project Structure
 
