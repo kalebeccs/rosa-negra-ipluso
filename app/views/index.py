@@ -41,7 +41,7 @@ class IndexPage(ctk.CTkFrame):
             self,
             text="As nossas linhas de vinhos",
             font=("Arial", 24, "bold"),
-            text_color="#C9A234",
+            text_color="white",
         )
         title_label.pack(pady=20)
 
