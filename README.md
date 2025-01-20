@@ -1,24 +1,25 @@
-# Rosa Negra
+# 🌹 Rosa Negra iPluso
 
-<img src="app/assets/icon.ico" width="170">
+<img src="app\assets\logo.png" width="170">
 
 ## Overview
 
-Rosa Negra is a wine management application designed to help users explore and manage different categories of wines. The application provides a user-friendly interface to navigate through various sections such as product listings, cart, user profiles, and more.
+Rosa Negra iPluso is an interactive application for managing and exploring wines and bottles in a unique way. This project combines modern technology with the sophistication of the wine world, providing a rich and functional experience.
 
-## Features
+---
 
-- **Home Page**: Displays an introductory section with an image and text, followed by wine categories.
-- **Product Page**: Lists all available wines with detailed information.
-- **Cart Page**: Allows users to view and manage their selected wines.
-- **Login and Register Pages**: Provides user authentication and registration functionalities.
-- **Profile Page**: Displays user profile information.
-- **Dashboard**: Admin dashboard for managing products, users, and purchases.
-- **Product Management**: Allows admins to manage wine products.
-- **User Management**: Allows admins to manage user accounts.
-- **Purchase Management**: Allows admins to manage purchase orders.
+## 🏗️ Technologies Used
 
-## Installation
+- **Python**: Main language for backend and logic.
+- **CustomTkinter**: Framework for modern graphical interfaces.
+- **Pillow (PIL)**: Image manipulation.
+- **Additional Libraries**: `bcrypt`, `darkdetect`, among others.
+
+---
+
+## 🚀 Installation and Usage
+
+Follow the steps below to set up the project locally:
 
 1. Clone the repository:
    ```sh
@@ -46,7 +47,7 @@ Rosa Negra is a wine management application designed to help users explore and m
    pip install -r requirements.txt
    ```
 
-## Usage
+## 🚀 Usage
 
 1. Run the application:
    ```sh
@@ -54,20 +55,18 @@ Rosa Negra is a wine management application designed to help users explore and m
    ```
 2. The application will start, and you can navigate through the different sections using the provided interface.
 
-## Project Structure
+---
+
+## 📁 Project Structure
 
 ```plaintext
 rosa-negra-ipluso/
 ├── app/
-│   ├── assets/
-│   └── views/
-├── db/
-├── src/
-│   ├── models/
-│   └── utils/
-├── README.md
-├── requirements.txt
-└── run.py
+│   ├── wine_app.py       # Main application code
+│   ├── assets/           # Static images and resources
+├── requirements.txt      # Project dependencies
+├── run.py                # Script to run the application
+└── README.md             # Project documentation
 ```
 
 ## Preview
