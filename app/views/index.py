@@ -11,15 +11,19 @@ class IndexPage(ctk.CTkFrame):
         main_content_frame = ctk.CTkFrame(self, fg_color="transparent")
         main_content_frame.pack(pady=20, padx=5, fill="x")
 
+        # Frame para centralizar a imagem e o texto
+        content_frame = ctk.CTkFrame(main_content_frame)
+        content_frame.pack(pady=10)
+
         # Imagem no lado esquerdo
         image_path = os.path.join(os.path.dirname(__file__), '..', 'assets', 'banner-index.jpg')
         image = ctk.CTkImage(light_image=Image.open(image_path), dark_image=Image.open(image_path), size=(450, 350))
-        image_label = ctk.CTkLabel(main_content_frame, image=image, text="")
-        image_label.pack(side="left", padx=(0,10), pady=5)
+        image_label = ctk.CTkLabel(content_frame, image=image, text="")
+        image_label.pack(side="left", padx=(0, 10), pady=5)
 
         # Texto no lado direito
         text_label = ctk.CTkLabel(
-            main_content_frame,
+            content_frame,
             text=(
                 "O vinho é muito mais do que uma bebida: é uma expressão de história, "
                 "cultura e paixão. Cada garrafa carrega consigo a alma do terroir de onde foi produzida, "
@@ -34,9 +38,9 @@ class IndexPage(ctk.CTkFrame):
             wraplength=500,
             justify="left",
         )
-        text_label.pack(side="left", padx=(10,0), pady=5)
+        text_label.pack(side="left", padx=(10, 0), pady=5)
 
-        # Título da seção
+           # Título da seção
         title_label = ctk.CTkLabel(
             self,
             text="As nossas linhas de vinhos",
