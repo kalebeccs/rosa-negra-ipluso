@@ -15,7 +15,7 @@ class IndexPage(ctk.CTkFrame):
         image_path = os.path.join(os.path.dirname(__file__), '..', 'assets', 'banner-index.jpg')
         image = ctk.CTkImage(light_image=Image.open(image_path), dark_image=Image.open(image_path), size=(450, 350))
         image_label = ctk.CTkLabel(main_content_frame, image=image, text="")
-        image_label.pack(side="left", padx=20, pady=10)
+        image_label.pack(side="left", padx=(0,10), pady=5)
 
         # Texto no lado direito
         text_label = ctk.CTkLabel(
@@ -34,7 +34,7 @@ class IndexPage(ctk.CTkFrame):
             wraplength=500,
             justify="left",
         )
-        text_label.pack(side="right", padx=20, pady=5)
+        text_label.pack(side="left", padx=(10,0), pady=5)
 
         # Título da seção
         title_label = ctk.CTkLabel(
