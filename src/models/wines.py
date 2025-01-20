@@ -52,6 +52,12 @@ def get_wine_by_id(pk_wine):
     wine = fetch_query(query, params)
     return wine
 
+def get_wines_by_type(wine_type):
+    query = "SELECT * FROM wines WHERE type = ?;"
+    params = (wine_type,)
+    wines = fetch_query(query, params)
+    return wines
+
 def delete_wine(pk_wine):
     query = "DELETE FROM wines WHERE pk_wine = ?;"
     params = (pk_wine,)
