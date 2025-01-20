@@ -176,7 +176,7 @@ WINES = [
     {
         "brand": "Rosa Negra",
         "name": "Tinto",
-        "price": "39.99",
+        "price": "29.99",
         "type": "Mesa",
         "alcohol": "12.5%",
         "year": "2024",
@@ -196,7 +196,7 @@ WINES = [
     {
         "brand": "Rosa Negra",
         "name": "Tinto",
-        "price": "35.99",
+        "price": "49.99",
         "type": "Reserva",
         "alcohol": "14%",
         "year": "2025",
@@ -206,7 +206,7 @@ WINES = [
     {
         "brand": "Rosa Negra",
         "name": "Branco Frizante",
-        "price": "25.99",
+        "price": "89.99",
         "type": "Exotico",
         "alcohol": "10.5%",
         "year": "2024",
@@ -216,7 +216,7 @@ WINES = [
     {
         "brand": "Rosa Negra",
         "name": "Rose",
-        "price": "29.99",
+        "price": "69.99",
         "type": "Exotico",
         "alcohol": "11.5%",
         "year": "2024",
@@ -226,7 +226,7 @@ WINES = [
     {
         "brand": "Rosa Negra",
         "name": "Verde",
-        "price": "38.50",
+        "price": "79.99",
         "type": "Exotico",
         "alcohol": "11.5%",
         "year": "2024",
@@ -236,7 +236,7 @@ WINES = [
     {
         "brand": "Rosa Negra",
         "name": "Tinto",
-        "price": "35.99",
+        "price": "115.99",
         "type": "Signature",
         "alcohol": "14.5%",
         "year": "2025",
@@ -246,7 +246,7 @@ WINES = [
     {
         "brand": "Rosa Negra",
         "name": "Branco",
-        "price": "35.99",
+        "price": "115.99",
         "type": "Signature",
         "alcohol": "13%",
         "year": "2025",
