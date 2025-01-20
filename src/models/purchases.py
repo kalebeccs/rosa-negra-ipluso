@@ -51,3 +51,59 @@ def insert_purchase_items(purchase_items):
         params = (purchase_item['fk_purchase'], purchase_item['fk_wine'], purchase_item['quantity'])
         execute_query(query, params)
     logging.info(f"{len(purchase_items)} purchase items sucessfully inserted")
+
+
+
+def add_purchase_item(purchase_id, wine_id, quantity):
+    """
+    Add an item to a purchase in the database.
+
+    :param purchase_id: ID of the purchase
+    :param wine_id: ID of the wine being purchased
+    :param quantity: Quantity of the wine being purchased
+    """
+    query = "INSERT INTO purchase_items (fk_purchase, fk_wine, quantity) VALUES (?, ?, ?);"
+    params = (purchase_id, wine_id, quantity)
+    execute_query(query, params)
+    logging.info(f"Purchase item {purchase_id} successfully added")
+
+def get_purchase_details(purchase_id):
+    """
+    Retrieve details of a purchase from the database.
+
+    :param purchase_id: ID of the purchase
+    :return: Dictionary containing purchase details and items
+    """
+    purchase_query = "SELECT pk_purchase, fk_user, total_value FROM purchases WHERE pk_purchase = ?;"
+    items_query = "SELECT fk_wine, quantity FROM purchase_items WHERE fk_purchase = ?;"
+    
+    purchase = fetch_query(purchase_query, (purchase_id,), fetch_one=True)
+    items = fetch_query(items_query, (purchase_id,))
+    
+    if purchase:
+        purchase_details = {
+            'purchase_id': purchase['pk_purchase'],
+            'user_id': purchase['fk_user'],
+            'total_value': purchase['total_value'],
+            'items': [{'wine_id': item['fk_wine'], 'quantity': item['quantity']} for item in items]
+        }
+        return purchase_details
+    else:
+        return None
+
+def get_all_purchases():
+    """
+    Retrieve all purchases from the database.
+
+    :return: List of dictionaries containing purchase details
+    """
+    query = "SELECT pk_purchase, fk_user, total_value FROM purchases;"
+    purchases = fetch_query(query)
+
+    purchase_list = []
+    for purchase in purchases:
+        purchase_details = get_purchase_details(purchase['pk_purchase'])
+        if purchase_details:
+            purchase_list.append(purchase_details)
+    
+    return purchase_list

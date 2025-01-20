@@ -43,8 +43,8 @@ class Router:
             "cart": CartPage(self.app.content, self.app),
             "login": LoginPage(self.app.content, self.app),
             "register": RegisterPage(self.app.content, self.app),
-            "profile": ProfilePage(self.app.content),
-            "dashboard": DashboardPage(self.app.content),
+            "profile": ProfilePage(self.app.content, self.app),
+            "dashboard": DashboardPage(self.app.content, self.app),
             "product_management": ProductManagementPage(self.app.content),
             "user_management": UserManagementPage(self.app.content),
             "purchase_management": PurchaseManagementPage(self.app.content),
@@ -65,6 +65,8 @@ class Router:
         
         if page_name == "cart":
             self.pages[page_name].update_cart()
+        elif page_name == "profile":
+            self.pages[page_name].load_user_details()
         
         
 
