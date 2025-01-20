@@ -1,5 +1,6 @@
 import customtkinter as ctk
 import logging
+from app.global_state import add_to_cart
 from src.models.wines import get_wines_by_type
 
 class ProductPage(ctk.CTkFrame):
@@ -73,8 +74,5 @@ class ProductPage(ctk.CTkFrame):
             add_to_cart_button.pack(anchor="e", padx=10, pady=5)
 
     def add_to_cart(self, product):
-        # Assuming you have a cart attribute in your class
-        if not hasattr(self, 'cart'):
-            self.cart = []
-        self.cart.append(product)
-        logging.info(f"Adicionado ao carrinho: {product['type']} {product['name']}")
+        add_to_cart(product, 1)
+        logging.info(f"Added to cart: {product['type']} {product['name']}")

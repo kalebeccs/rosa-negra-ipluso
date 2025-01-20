@@ -39,23 +39,37 @@ class CartPage(ctk.CTkFrame):
             empty_label = ctk.CTkLabel(self.cart_frame, text="Seu carrinho está vazio.", font=("Arial", 16))
             empty_label.pack(pady=10)
         else:
-            for item in cart_items:
-                item_frame = ctk.CTkFrame(self.cart_frame, fg_color="lightgray")
+            for cart_item in cart_items:
+                item = cart_item['item']
+                quantity = cart_item['quantity']
+                item_frame = ctk.CTkFrame(self.cart_frame, fg_color="#242424")
                 item_frame.pack(pady=5, padx=10, fill="x")
 
                 item_info = (
                     f"Nome: {item['name']}\n"
                     f"Preço: ${item['price']:.2f}\n"
-                    f"Quantidade: {item['quantity']}\n"
+                    f"Quantidade: {quantity}\n"
                 )
-                item_label = ctk.CTkLabel(item_frame, text=item_info, font=("Arial", 16), justify="left")
+                item_label = ctk.CTkLabel(item_frame, text=item_info, font=("Arial", 16), justify="left", text_color="white")
                 item_label.pack(side="left", padx=10, pady=5)
 
                 remove_button = ctk.CTkButton(item_frame, text="Remover", command=lambda i=item: self.remove_item(i))
+                remove_button = ctk.CTkButton(
+                    item_frame, 
+                    text="Remover", 
+                    command=lambda i=item: self.remove_item(i),
+                    font=("Arial", 12, "bold"),
+                    fg_color="#C9A234",
+                    hover_color="#A88227",
+                    text_color="#292929"
+                )
                 remove_button.pack(side="right", padx=10, pady=5)
 
     def remove_item(self, item):
         remove_from_cart(item)
+        self.display_cart_items()
+        
+    def update_cart(self):
         self.display_cart_items()
 
     def checkout(self):

@@ -62,6 +62,11 @@ class Router:
         self.app.clear_frame()
         self.app.title(f"{page_name.capitalize()} - Rosa Negra")
         self.pages[page_name].pack(fill="both", expand=True)
+        
+        if page_name == "cart":
+            self.pages[page_name].update_cart()
+        
+        
 
     def show_index_page(self):
         self.navigate_to("index")

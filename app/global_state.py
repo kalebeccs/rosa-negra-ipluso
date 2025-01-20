@@ -1,3 +1,5 @@
+import logging
+
 # Global variables to store the user's login state
 user_logged_in = False
 current_user_id = None
@@ -45,8 +47,15 @@ def is_user_admin():
 def get_current_user_cart():
     return current_user_cart
 
-def add_to_cart(item):
-    current_user_cart.append(item)
+def add_to_cart(item, quantity):
+    for cart_item in current_user_cart:
+        if cart_item['item'] == item:
+            cart_item['quantity'] += quantity
+            break
+    else:
+        current_user_cart.append({'item': item, 'quantity': quantity})
 
 def remove_from_cart(item):
-    current_user_cart.remove(item)
+    global current_user_cart
+    current_user_cart = [cart_item for cart_item in current_user_cart if cart_item['item'] != item]
+    logging.info(f"Removed from cart: {item['type']} {item['name']}")
