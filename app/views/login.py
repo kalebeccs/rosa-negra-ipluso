@@ -24,7 +24,7 @@ class LoginPage(ctk.CTkFrame):
         login_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
 
         # Título da página
-        title_label = ctk.CTkLabel(login_frame, text="Página de login", font=("Arial", 24, "bold"))
+        title_label = ctk.CTkLabel(login_frame, text="Entrar", font=("Arial", 24, "bold"))
         title_label.pack(pady=20)
 
         # Campo de entrada para o email

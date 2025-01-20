@@ -23,7 +23,7 @@ class RegisterPage(ctk.CTkFrame):
         register_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
 
         # Título da página
-        title_label = ctk.CTkLabel(register_frame, text="Pagina de registro", font=("Arial", 24, "bold"))
+        title_label = ctk.CTkLabel(register_frame, text="Registro", font=("Arial", 24, "bold"))
         title_label.pack(pady=20)
 
         # Campo de entrada para o nome
@@ -84,7 +84,7 @@ class RegisterPage(ctk.CTkFrame):
         # Botão para voltar à tela de login
         back_button = ctk.CTkButton(
             back_frame, 
-            text="Voltar ao Login", 
+            text="Voltar a tela Inicial", 
             command=self.back_to_login, 
             font=("Arial", 12, "bold"),
             fg_color="#C9A234",
