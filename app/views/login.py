@@ -1,5 +1,8 @@
 import customtkinter as ctk
 
+from app.global_state import login_user
+from src.models.users import get_user_details, verify_user_credentials
+
 class LoginPage(ctk.CTkFrame):
     def __init__(self, master, app):
         """
@@ -48,6 +51,10 @@ class LoginPage(ctk.CTkFrame):
         )
         login_button.pack(pady=20)
 
+        # Label para mensagens de status
+        self.status_label = ctk.CTkLabel(login_frame, text="")
+        self.status_label.pack(pady=5)
+
         # Segunda coluna - Botão de registro e frase
         register_frame = ctk.CTkFrame(self)
         register_frame.grid(row=0, column=1, padx=20, pady=20, sticky="nsew")
@@ -78,12 +85,15 @@ class LoginPage(ctk.CTkFrame):
         email = self.email_entry.get()
         password = self.password_entry.get()
 
-        # Aqui você pode adicionar a lógica para verificar as credenciais do usuário
-        # Exemplo:
-        # if verify_user_credentials(email, password):
-        #     # Lógica para login bem-sucedido
-        # else:
-        #     # Lógica para falha no login
+        # Verificar as credenciais do usuário
+        if verify_user_credentials(email, password):
+            user_details = get_user_details(email)
+            login_user(user_details['id'], email, password, user_details['role'])
+            self.status_label.configure(text="Login successful!", text_color="gray")
+            # Navegar para a página inicial ou outra página após o login
+            self.app.router.show_index_page()
+        else:
+            self.status_label.configure(text="Invalid email or password!", text_color="gray")
 
         # Limpar os campos de entrada após o login
         self.email_entry.delete(0, 'end')

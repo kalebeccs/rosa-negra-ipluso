@@ -59,10 +59,10 @@ def verify_user_credentials(email, password):
     :return: True if credentials are correct, False otherwise
     """
     query = "SELECT password_hash FROM users WHERE email = ?;"
-    result = execute_query(query, (email,))
+    result = fetch_query(query, (email,), fetch_one=True)
     
     if result:
-        stored_password_hash = result[0]['password_hash']
+        stored_password_hash = result['password_hash']
         if verify_password(password, stored_password_hash):
             logging.info(f"User {email} successfully authenticated")
             return True
@@ -72,3 +72,23 @@ def verify_user_credentials(email, password):
         logging.warning(f"User {email} failed authentication: email not found")
     
     return False
+
+def get_user_details(email):
+    """
+    Retrieve user details from the database based on the email.
+
+    :param email: User's email
+    :return: Dictionary containing user details (id, email, role)
+    """
+    query = "SELECT pk_user, email, role FROM users WHERE email = ?;"
+    result = fetch_query(query, (email,))
+
+    if result:
+        user_details = {
+            'id': result[0]['pk_user'],
+            'email': result[0]['email'],
+            'role': result[0]['role']
+        }
+        return user_details
+    else:
+        return None
