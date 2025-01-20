@@ -40,7 +40,7 @@ class Router:
         self.pages = {
             "index": IndexPage(self.app.content, self.app),
             "product": ProductPage(self.app.content),
-            "cart": CartPage(self.app.content),
+            "cart": CartPage(self.app.content, self.app),
             "login": LoginPage(self.app.content, self.app),
             "register": RegisterPage(self.app.content, self.app),
             "profile": ProfilePage(self.app.content),
