@@ -29,7 +29,7 @@ class IndexPage(ctk.CTkFrame):
                 "até os delicados brancos e os vibrantes rosés. Além disso, oferecemos opções exclusivas de vinhos frizantes, "
                 "verdes e reservas, cada um cuidadosamente selecionado para proporcionar uma experiência sensorial única."
             ),
-            font=("Arial", 14),
+            font=("Arial", 20),
             text_color="white",
             wraplength=500,
             justify="left",
@@ -76,7 +76,7 @@ class IndexPage(ctk.CTkFrame):
             image_label.pack(pady=0)  # No padding to remove qualquer espaço
 
             description_label = ctk.CTkLabel(card, text=category["description"], font=("Arial", 12), wraplength=180, justify="center")
-            description_label.pack(pady=5)
+            description_label.pack(pady=(10,15))
 
         categories_frame.grid_columnconfigure((0, 1, 2, 3), weight=1)
 
