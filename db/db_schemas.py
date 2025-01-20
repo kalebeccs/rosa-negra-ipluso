@@ -9,7 +9,7 @@ TABLES = {
             vat_number INTEGER,
             address_1 TEXT,
             address_2 TEXT,
-            role TEXT NOT NULL
+            role TEXT NOT NULL DEFAULT 'user'
         );
     """,
     "wines": """
