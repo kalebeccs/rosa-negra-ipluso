@@ -23,11 +23,11 @@ class RegisterPage(ctk.CTkFrame):
         register_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
 
         # Título da página
-        title_label = ctk.CTkLabel(register_frame, text="Register Page", font=("Arial", 24, "bold"))
+        title_label = ctk.CTkLabel(register_frame, text="Pagina de registro", font=("Arial", 24, "bold"))
         title_label.pack(pady=20)
 
         # Campo de entrada para o nome
-        name_label = ctk.CTkLabel(register_frame, text="Name")
+        name_label = ctk.CTkLabel(register_frame, text="Nome")
         name_label.pack(pady=5)
         self.name_entry = ctk.CTkEntry(register_frame)
         self.name_entry.pack(pady=5)
@@ -39,13 +39,13 @@ class RegisterPage(ctk.CTkFrame):
         self.email_entry.pack(pady=5)
 
         # Campo de entrada para a data de nascimento
-        dob_label = ctk.CTkLabel(register_frame, text="Date of Birth (YYYY-MM-DD)")
+        dob_label = ctk.CTkLabel(register_frame, text="Data de nascimento (YYYY-MM-DD)")
         dob_label.pack(pady=5)
         self.dob_entry = ctk.CTkEntry(register_frame)
         self.dob_entry.pack(pady=5)
 
         # Campo de entrada para a senha
-        password_label = ctk.CTkLabel(register_frame, text="Password")
+        password_label = ctk.CTkLabel(register_frame, text="Senha")
         password_label.pack(pady=5)
         self.password_entry = ctk.CTkEntry(register_frame, show="*")
         self.password_entry.pack(pady=5)
@@ -53,7 +53,7 @@ class RegisterPage(ctk.CTkFrame):
         # Botão de registro
         register_button = ctk.CTkButton(
             register_frame, 
-            text="Register", 
+            text="Registrar", 
             command=self.register_user, 
             font=("Arial", 12, "bold"),
             fg_color="#C9A234",
@@ -84,7 +84,7 @@ class RegisterPage(ctk.CTkFrame):
         # Botão para voltar à tela de login
         back_button = ctk.CTkButton(
             back_frame, 
-            text="Back to Login", 
+            text="Voltar ao Login", 
             command=self.back_to_login, 
             font=("Arial", 12, "bold"),
             fg_color="#C9A234",
@@ -101,19 +101,19 @@ class RegisterPage(ctk.CTkFrame):
 
         # Verificar se todos os campos foram preenchidos
         if not name or not email or not dob or not password:
-            self.status_label.configure(text="All fields must be filled!", text_color="gray")
+            self.status_label.configure(text="Todos os campos devem ser preenchidos!", text_color="gray")
             return
 
         # Validar o formato do email
         email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
         if not re.match(email_regex, email):
-            self.status_label.configure(text="Invalid email format!", text_color="gray")
+            self.status_label.configure(text="Email inválido!", text_color="gray")
             return
 
         # Validar o formato da data de nascimento
         dob_regex = r'^\d{4}-\d{2}-\d{2}$'
         if not re.match(dob_regex, dob):
-            self.status_label.configure(text="Invalid date format! Use YYYY-MM-DD.", text_color="gray")
+            self.status_label.configure(text="Data de nascimento inválida! Use YYYY-MM-DD.", text_color="gray")
             return
 
         # Aqui você pode adicionar a lógica para registrar o usuário, por exemplo, chamando uma função para inserir os dados no banco de dados
@@ -126,7 +126,7 @@ class RegisterPage(ctk.CTkFrame):
         self.password_entry.delete(0, 'end')
 
         # Exibir uma mensagem de sucesso
-        self.status_label.configure(text="User registered successfully!", text_color="gray")
+        self.status_label.configure(text="Usuário registrado com sucesso!", text_color="gray")
 
     def back_to_login(self):
         self.app.router.show_login_page()
