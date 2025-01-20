@@ -1,7 +1,7 @@
 import customtkinter as ctk
 
 class IndexPage(ctk.CTkFrame):
-    def __init__(self, master):
+    def __init__(self, master, app):
         super().__init__(master)
         
         banner_frame = ctk.CTkFrame(self, height=80, fg_color="lightgray", corner_radius=0)
@@ -39,11 +39,11 @@ class IndexPage(ctk.CTkFrame):
         text_label = ctk.CTkLabel(
             main_content_frame,
             text=(
-                "Each glass of wine is an invitation to a sensorial journey." 
-                "From the delicate aroma of fruits to the rich and persistent body on the palate, "
-                "our wines have been selected to transform any occasion into a celebration."
-                "Explore our gallery and discover the perfect wine for every moment." 
-                "Let's toast together to tradition, flavor and the art of living well!"
+                "Cada taça de vinho é um convite para uma jornada sensorial."
+                "Do aroma delicado das frutas ao corpo rico e persistente no paladar,"
+                "nossos vinhos foram selecionados para transformar qualquer ocasião em uma celebração."
+                "Explore nossa galeria e descubra o vinho perfeito para cada momento." 
+                "Brindemos juntos à tradição, ao sabor e à arte de viver bem!"
             ),
             font=("Arial", 15),
             text_color="black",
