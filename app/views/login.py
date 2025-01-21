@@ -89,11 +89,10 @@ class LoginPage(ctk.CTkFrame):
         if verify_user_credentials(email, password):
             user_details = get_user_details(email)
             login_user(user_details['id'], email, password, user_details['role'])
-            self.status_label.configure(text="Tudo pronto! Vamos começar?", text_color="gray")
             # Navegar para a página inicial ou outra página após o login
             self.app.router.show_index_page()
         else:
-            self.status_label.configure(text="Invalid email or password!", text_color="gray")
+            self.status_label.configure(text="Email ou senha invalido!", text_color="gray")
 
         # Limpar os campos de entrada após o login
         self.email_entry.delete(0, 'end')
