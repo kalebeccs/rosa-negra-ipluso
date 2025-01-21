@@ -43,7 +43,7 @@ class Header(ctk.CTkFrame):
 
         home_button = ctk.CTkButton(
             self.button_frame, 
-            text="HOME", 
+            text="Página Inicial", 
             command=self.router.show_index_page, 
             font=("Arial", 20, "bold"), 
             width=80, 
@@ -56,7 +56,7 @@ class Header(ctk.CTkFrame):
 
         wines_button = ctk.CTkButton(
             self.button_frame, 
-            text="WINES", 
+            text="Garrafeira", 
             command=self.router.show_product_page, 
             font=("Arial", 20, "bold"), 
             width=80, 
