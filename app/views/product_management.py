@@ -18,14 +18,14 @@ class ProductManagementPage(ctk.CTkFrame):
         # Tabela de vinhos
         self.wine_table = ttk.Treeview(self.table_frame, columns=("ID", "Brand", "Name", "Price", "Type", "Alcohol", "Year", "Region", "Description"), show="headings")
         self.wine_table.heading("ID", text="ID")
-        self.wine_table.heading("Brand", text="Brand")
-        self.wine_table.heading("Name", text="Name")
-        self.wine_table.heading("Price", text="Price")
-        self.wine_table.heading("Type", text="Type")
-        self.wine_table.heading("Alcohol", text="Alcohol")
-        self.wine_table.heading("Year", text="Year")
-        self.wine_table.heading("Region", text="Region")
-        self.wine_table.heading("Description", text="Description")
+        self.wine_table.heading("Brand", text="Marca")
+        self.wine_table.heading("Name", text="Nome")
+        self.wine_table.heading("Price", text="Preço")
+        self.wine_table.heading("Type", text="Tipo")
+        self.wine_table.heading("Alcohol", text="Alcool")
+        self.wine_table.heading("Year", text="Ano")
+        self.wine_table.heading("Region", text="Região")
+        self.wine_table.heading("Description", text="Descrição")
         self.wine_table.pack(fill="both", expand=True)
 
         # Bind para selecionar uma linha da tabela
@@ -35,14 +35,14 @@ class ProductManagementPage(ctk.CTkFrame):
         self.fields_frame = ctk.CTkFrame(self, fg_color="transparent")
         self.fields_frame.pack(pady=10, padx=20, fill="both", expand=True)
 
-        self.brand_entry = self.create_entry("Brand")
-        self.name_entry = self.create_entry("Name")
-        self.price_entry = self.create_entry("Price")
-        self.type_entry = self.create_entry("Type")
-        self.alcohol_entry = self.create_entry("Alcohol")
-        self.year_entry = self.create_entry("Year")
-        self.region_entry = self.create_entry("Region")
-        self.description_entry = self.create_entry("Description")
+        self.brand_entry = self.create_entry("Marca")
+        self.name_entry = self.create_entry("Nome")
+        self.price_entry = self.create_entry("Preço")
+        self.type_entry = self.create_entry("Tipo")
+        self.alcohol_entry = self.create_entry("Alcool")
+        self.year_entry = self.create_entry("Ano")
+        self.region_entry = self.create_entry("Região")
+        self.description_entry = self.create_entry("Descrição")
 
         # Botão para salvar as alterações
         save_button = ctk.CTkButton(

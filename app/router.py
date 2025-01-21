@@ -8,8 +8,6 @@ from app.views.register import RegisterPage
 from app.views.profile import ProfilePage
 from app.views.dashboard import DashboardPage
 from app.views.product_management import ProductManagementPage
-from app.views.user_management import UserManagementPage
-from app.views.purchase_management import PurchaseManagementPage
 from app.views.add_wine import AddWinePage 
 
 class Router:
@@ -31,8 +29,6 @@ class Router:
         show_profile_page(): Displays the profile page.
         show_dashboard_page(): Displays the dashboard page.
         show_product_management_page(): Displays the product management page.
-        show_user_management_page(): Displays the user management page.
-        show_purchase_management_page(): Displays the purchase management page.
     """
     def __init__(self, app):
         self.app = app
@@ -48,8 +44,6 @@ class Router:
             "profile": ProfilePage(self.app.content, self.app),
             "dashboard": DashboardPage(self.app.content, self.app),
             "product_management": ProductManagementPage(self.app.content, self.app),
-            "user_management": UserManagementPage(self.app.content),
-            "purchase_management": PurchaseManagementPage(self.app.content),
             "add_wine": AddWinePage(self.app.content, self.app),
         }
 
@@ -96,12 +90,6 @@ class Router:
 
     def show_product_management_page(self):
         self.navigate_to("product_management")
-
-    def show_user_management_page(self):
-        self.navigate_to("user_management")
-
-    def show_purchase_management_page(self):
-        self.navigate_to("purchase_management")
         
     def show_add_wine_page(self):
         self.navigate_to("add_wine")

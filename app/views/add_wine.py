@@ -12,16 +12,16 @@ class AddWinePage(ctk.CTkFrame):
         title_label.pack(pady=20)
 
         # Campos de entrada para os detalhes do vinho
-        self.name_entry = self.create_entry("Name")
-        self.price_entry = self.create_entry("Price")
-        label = ctk.CTkLabel(self, text="Type")
+        self.name_entry = self.create_entry("Nome")
+        self.price_entry = self.create_entry("Preço")
+        label = ctk.CTkLabel(self, text="Tipo")
         label.pack(pady=5)
         self.type_combobox = ctk.CTkComboBox(self, values=["Mesa", "Exotico", "Reserva", "Signature"])
         self.type_combobox.pack(pady=5)
-        self.alcohol_entry = self.create_entry("Alcohol")
-        self.year_entry = self.create_entry("Year (YYYY)")
-        self.region_entry = self.create_entry("Region")
-        self.description_entry = self.create_entry("Description")
+        self.alcohol_entry = self.create_entry("Alcool (%)")
+        self.year_entry = self.create_entry("Ano (AAAA)")
+        self.region_entry = self.create_entry("Região")
+        self.description_entry = self.create_entry("Descrição")
 
         # Botão para adicionar o vinho
         add_button = ctk.CTkButton(
