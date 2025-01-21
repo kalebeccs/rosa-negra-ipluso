@@ -107,3 +107,21 @@ def get_all_purchases():
             purchase_list.append(purchase_details)
     
     return purchase_list
+
+def get_sales_data():
+    """
+    Retrieve sales data from the database.
+    :return: List of dictionaries containing sales data
+    """
+    query = """
+    SELECT 
+        wines.type AS wine_type,
+        wines.name AS wine_name,
+        purchase_items.quantity AS quantity_sale,
+        (purchase_items.quantity * wines.price) AS total_value
+    FROM 
+        purchase_items
+    JOIN 
+        wines ON purchase_items.fk_wine = wines.pk_wine;
+    """
+    return fetch_query(query)
