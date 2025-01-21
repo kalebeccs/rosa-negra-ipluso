@@ -89,7 +89,7 @@ class LoginPage(ctk.CTkFrame):
         if verify_user_credentials(email, password):
             user_details = get_user_details(email)
             login_user(user_details['id'], email, password, user_details['role'])
-            self.status_label.configure(text="Login successful!", text_color="gray")
+            self.status_label.configure(text="Tudo pronto! Vamos começar?", text_color="gray")
             # Navegar para a página inicial ou outra página após o login
             self.app.router.show_index_page()
         else:

@@ -57,28 +57,33 @@ class ProductPage(ctk.CTkFrame):
             product_frame = ctk.CTkFrame(
                 frame, 
                 fg_color="#242424", 
-                corner_radius=8, 
-                border_width=1, 
-                border_color="#C9A234"
+                corner_radius=10, 
+                border_width=2, 
+                border_color="#C9A234",
+                width=300,  # Largura do frame
+                height=400  # Altura do frame
             )
-            product_frame.grid(row=i // columns, column=i % columns, padx=15, pady=15, sticky="nsew")
+            product_frame.grid(row=i // columns, column=i % columns, padx=20, pady=20, sticky="nsew")
+            product_frame.grid_propagate(False)  # Desativa ajuste automático de tamanho
 
-            # Informações do produto
+            # Informações do produto (incluindo descrição)
             product_info = (
-                f"Nome: {product['name']}\n"
-                f"Tipo: {product['type']}\n"
-                f"Valor: €{product['price']:.2f}\n"
-                f"Álcool: {product['alcohol']}%\n"
-                f"Região: {product['region']}\n"
+                f"{product['name']}\n"
+                f"€{product['price']:.2f}\n"
+                f"{product['alcohol']}\n"
+                f"{product['region']}\n"
+                f"\n"
+                f"{product['description']}\n"
             )
             product_label = ctk.CTkLabel(
                 product_frame,
                 text=product_info,
-                font=("Arial", 14),
-                justify="left",
+                font=("Arial", 15),
+                justify="center",  # Centralizar texto
                 text_color="#FFFFFF",
+                wraplength=280  # Quebra de linha para caber no frame
             )
-            product_label.pack(anchor="center", padx=10, pady=5)  # Centralizar texto
+            product_label.pack(expand=True, padx=15, pady=15)  # Adicionado padding interno
 
             # Botão "Adicionar ao Carrinho"
             add_to_cart_button = ctk.CTkButton(
@@ -90,7 +95,7 @@ class ProductPage(ctk.CTkFrame):
                 hover_color="#A88227",
                 text_color="#292929"
             )
-            add_to_cart_button.pack(anchor="center", pady=10)  # Centralizar botão
+            add_to_cart_button.pack(pady=10)  # Espaçamento abaixo do texto
 
         # Ajustar as colunas para expandirem uniformemente
         for col in range(columns):
