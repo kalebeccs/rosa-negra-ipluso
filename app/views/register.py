@@ -1,6 +1,7 @@
 import customtkinter as ctk
+
 from src.models.users import insert_user
-import re
+from src.utils import is_of_age, validate_dob, validate_email, validate_required_fields
 
 class RegisterPage(ctk.CTkFrame):
     def __init__(self, master, app):
@@ -99,21 +100,24 @@ class RegisterPage(ctk.CTkFrame):
         dob = self.dob_entry.get()
         password = self.password_entry.get()
 
-        # Verificar se todos os campos foram preenchidos
-        if not name or not email or not dob or not password:
+        # Verificar se todos os campos foram preenchidos usando a função validate_required_fields
+        if not validate_required_fields(name, email, dob, password):
             self.status_label.configure(text="Todos os campos devem ser preenchidos!", text_color="gray")
             return
 
-        # Validar o formato do email
-        email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-        if not re.match(email_regex, email):
+        # Validar o formato do email usando a função validate_email
+        if not validate_email(email):
             self.status_label.configure(text="Email inválido!", text_color="gray")
             return
 
-        # Validar o formato da data de nascimento
-        dob_regex = r'^\d{4}-\d{2}-\d{2}$'
-        if not re.match(dob_regex, dob):
-            self.status_label.configure(text="Data de nascimento inválida! Use YYYY-MM-DD.", text_color="gray")
+        # Validar o formato da data de nascimento usando a função validate_dob
+        if not validate_dob(dob):
+            self.status_label.configure(text="Data de nascimento inválida! Use AAAA-MM-DD.", text_color="gray")
+            return
+
+        # Verificar se a idade é menor que 18 anos usando a função is_of_age
+        if not is_of_age(dob, 18):
+            self.status_label.configure(text="Você deve ter pelo menos 18 anos para se registrar.", text_color="gray")
             return
 
         # Aqui você pode adicionar a lógica para registrar o usuário, por exemplo, chamando uma função para inserir os dados no banco de dados

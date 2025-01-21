@@ -46,8 +46,8 @@ class CartPage(ctk.CTkFrame):
                 item_frame.pack(pady=5, padx=10, fill="x")
 
                 item_info = (
-                    f"Nome: {item['name']}\n"
-                    f"Preço: ${item['price']:.2f}\n"
+                    f"{item['type']} {item['name']}\n"
+                    f"Preço: €{item['price']:.2f}\n"
                     f"Quantidade: {quantity}\n"
                 )
                 item_label = ctk.CTkLabel(item_frame, text=item_info, font=("Arial", 16), justify="left", text_color="white")

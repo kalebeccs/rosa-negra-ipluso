@@ -92,3 +92,53 @@ def get_user_details(email):
         return user_details
     else:
         return None
+
+def get_user_details_by_id(user_id):
+    """
+    Retrieve user details from the database based on the user ID.
+
+    :param user_id: User's ID
+    :return: Dictionary containing user details
+    """
+    query = "SELECT name, dob, email, password_hash, vat_number, address_1, address_2 FROM users WHERE pk_user = ?;"
+    result = fetch_query(query, (user_id,), fetch_one=True)
+
+    if result:
+        user_details = {
+            'name': result['name'],
+            'dob': result['dob'],
+            'email': result['email'],
+            'password_hash': result['password_hash'],
+            'vat_number': result['vat_number'],
+            'address_1': result['address_1'],
+            'address_2': result['address_2']
+        }
+        return user_details
+    else:
+        return None
+
+def update_user_details(user_id, details):
+    """
+    Update user details in the database.
+
+    :param user_id: User's ID
+    :param details: Dictionary containing updated user details
+    """
+    password_hash = hash_password(details['password_hash'])
+    query = """
+    UPDATE users
+    SET name = ?, dob = ?, email = ?, password_hash = ?, vat_number = ?, address_1 = ?, address_2 = ?
+    WHERE pk_user = ?;
+    """
+    params = (
+        details['name'],
+        details['dob'],
+        details['email'],
+        password_hash,
+        details['vat_number'],
+        details['address_1'],
+        details['address_2'],
+        user_id
+    )
+    execute_query(query, params)
+    logging.info(f"User {user_id} details successfully updated")

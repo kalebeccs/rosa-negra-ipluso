@@ -170,6 +170,16 @@ USERS = [
         "address_2": "Praceta Liz Gomes, 800",
         "role": "admin",
     },
+    {
+        "name": "Elieser Santos",
+        "dob": "1999-02-09",
+        "email": "kalebe@gmail.com",
+        "password_hash": "1234",
+        "vat_number": "901456089",
+        "address_1": "Rua Napoleao Bonaparte, 323",
+        "address_2": "Praceta Liz Gomes, 800",
+        "role": "admin",
+    },
 ]
 
 WINES = [
