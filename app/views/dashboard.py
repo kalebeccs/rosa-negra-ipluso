@@ -1,5 +1,6 @@
 import customtkinter as ctk
-from src.models.purchases import get_all_purchases
+from tkinter import ttk
+from src.models.purchases import get_top_revenue_wines, get_top_selling_wines
 
 class DashboardPage(ctk.CTkFrame):
     def __init__(self, master, app):
@@ -14,32 +15,60 @@ class DashboardPage(ctk.CTkFrame):
         self.sales_frame = ctk.CTkFrame(self, fg_color="transparent")
         self.sales_frame.pack(pady=10, padx=20, fill="both", expand=True)
 
-        # Exibir a tabela de vendas
-        self.display_sales_table()
+        # Tabela de vendas
+        self.sales_table = ttk.Treeview(self.sales_frame, columns=("Type", "Name", "Quantity", "Total Value"), show="headings")
+        self.sales_table.heading("Type", text="Tipo")
+        self.sales_table.heading("Name", text="Nome")
+        self.sales_table.heading("Quantity", text="Quantidade Vendida")
+        self.sales_table.heading("Total Value", text="Valor Total")
+        self.sales_table.pack(fill="both", expand=True)
 
-    def display_sales_table(self):
-        sales_data = get_all_purchases()
+        # Carregar os dados de vendas na tabela
+        self.load_sales_data(get_top_selling_wines)
 
-        if not sales_data:
-            empty_label = ctk.CTkLabel(self.sales_frame, text="Nenhuma venda encontrada.", font=("Arial", 16))
-            empty_label.pack(pady=10)
-        else:
-            # Cabeçalhos da tabela
-            headers = ["ID", "Usuário", "Valor Total", "Itens", "Data"]
-            for col, header in enumerate(headers):
-                header_label = ctk.CTkLabel(self.sales_frame, text=header, font=("Arial", 16, "bold"))
-                header_label.grid(row=0, column=col, padx=10, pady=5)
+        # Frame para os botões
+        button_frame = ctk.CTkFrame(self, fg_color="transparent")
+        button_frame.pack(pady=10, padx=20, fill="x")
 
-            # Dados da tabela
-            for row, sale in enumerate(sales_data, start=1):
-                sale_id = sale['purchase_id']
-                user_id = sale['user_id']
-                total_value = sale['total_value']
-                items = ", ".join([f"{item['wine_id']} (x{item['quantity']})" for item in sale['items']])
-                date = sale.get('date', 'N/A')  # Adicione a data se disponível
+        # Botão para ir para a tela de gerenciamento de produtos
+        manage_products_button = ctk.CTkButton(
+            button_frame, 
+            text="Gerir Vinhos", 
+            command=self.app.router.show_product_management_page, 
+            font=("Arial", 12, "bold"),
+            fg_color="#C9A234",
+            hover_color="#A88227",
+            text_color="#292929"
+        )
+        manage_products_button.pack(side="right", padx=5)
 
-                ctk.CTkLabel(self.sales_frame, text=sale_id, font=("Arial", 14)).grid(row=row, column=0, padx=10, pady=5)
-                ctk.CTkLabel(self.sales_frame, text=user_id, font=("Arial", 14)).grid(row=row, column=1, padx=10, pady=5)
-                ctk.CTkLabel(self.sales_frame, text=f"€{total_value:.2f}", font=("Arial", 14)).grid(row=row, column=2, padx=10, pady=5)
-                ctk.CTkLabel(self.sales_frame, text=items, font=("Arial", 14)).grid(row=row, column=3, padx=10, pady=5)
-                ctk.CTkLabel(self.sales_frame, text=date, font=("Arial", 14)).grid(row=row, column=4, padx=10, pady=5)
+        # Botão para atualizar a tabela com os vinhos de maior receita
+        top_revenue_button = ctk.CTkButton(
+            button_frame, 
+            text="Top Vinhos por Receita", 
+            command=lambda: self.load_sales_data(get_top_revenue_wines), 
+            font=("Arial", 12, "bold"),
+            fg_color="#C9A234",
+            hover_color="#A88227",
+            text_color="#292929"
+        )
+        top_revenue_button.pack(side="right", padx=5)
+        
+        # Botão para atualizar a tabela com os vinhos mais vendidos
+        top_selling_button = ctk.CTkButton(
+            button_frame, 
+            text="Top Vinhos Vendidos", 
+            command=lambda: self.load_sales_data(get_top_selling_wines), 
+            font=("Arial", 12, "bold"),
+            fg_color="#C9A234",
+            hover_color="#A88227",
+            text_color="#292929"
+        )
+        top_selling_button.pack(side="right", padx=5)
+
+    def load_sales_data(self, data_function):
+        sales_data = data_function()
+        self.sales_table.delete(*self.sales_table.get_children())
+        for sale in sales_data:
+            total_value_sold = f"{sale['total_value_sold']:.2f}"
+            self.sales_table.insert("", "end", values=(sale['wine_type'], sale['wine_name'], sale['total_quantity_sold'], total_value_sold))

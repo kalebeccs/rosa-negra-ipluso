@@ -49,7 +49,7 @@ def get_all_wines():
 def get_wine_by_id(pk_wine):
     query = "SELECT * FROM wines WHERE pk_wine = ?;"
     params = (pk_wine,)
-    wine = fetch_query(query, params)
+    wine = fetch_query(query, params, fetch_one=True)
     return wine
 
 def get_wines_by_type(wine_type):

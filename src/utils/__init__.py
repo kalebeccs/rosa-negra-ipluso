@@ -50,14 +50,6 @@ def is_of_age(dob, age_limit=18):
     age = (datetime.now() - dob_date) // timedelta(days=365.2425)
     return age >= age_limit
 
-def validate_required_fields(*fields):
-    """
-    Validate that all required fields are filled.
-    :param fields: list of fields to check
-    :return: True if all fields are filled, False otherwise
-    """
-    return all(fields)
-
 def validate_vat_number(vat_number):
     """
     Validate the Portuguese VAT number (NIF).
@@ -74,3 +66,11 @@ def validate_vat_number(vat_number):
         calculated_check_digit = 0
 
     return check_digit == calculated_check_digit
+
+def validate_required_fields(*fields):
+    """
+    Validate that all required fields are filled.
+    :param fields: list of fields to check
+    :return: True if all fields are filled, False otherwise
+    """
+    return all(fields)

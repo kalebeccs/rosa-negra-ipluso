@@ -108,20 +108,46 @@ def get_all_purchases():
     
     return purchase_list
 
-def get_sales_data():
+def get_top_selling_wines():
     """
-    Retrieve sales data from the database.
+    Retrieve condensed sales data from the database.
     :return: List of dictionaries containing sales data
     """
     query = """
     SELECT 
         wines.type AS wine_type,
         wines.name AS wine_name,
-        purchase_items.quantity AS quantity_sale,
-        (purchase_items.quantity * wines.price) AS total_value
+        SUM(purchase_items.quantity) AS total_quantity_sold,
+        SUM(purchase_items.quantity * wines.price) AS total_value_sold
     FROM 
         purchase_items
     JOIN 
-        wines ON purchase_items.fk_wine = wines.pk_wine;
+        wines ON purchase_items.fk_wine = wines.pk_wine
+    GROUP BY 
+        wines.type, wines.name
+    ORDER BY 
+        total_quantity_sold DESC;
+    """
+    return fetch_query(query)
+
+def get_top_revenue_wines():
+    """
+    Retrieve condensed sales data from the database.
+    :return: List of dictionaries containing sales data
+    """
+    query = """
+    SELECT 
+        wines.type AS wine_type,
+        wines.name AS wine_name,
+        SUM(purchase_items.quantity) AS total_quantity_sold,
+        SUM(purchase_items.quantity * wines.price) AS total_value_sold
+    FROM 
+        purchase_items
+    JOIN 
+        wines ON purchase_items.fk_wine = wines.pk_wine
+    GROUP BY 
+        wines.type, wines.name
+    ORDER BY 
+        total_value_sold DESC;
     """
     return fetch_query(query)

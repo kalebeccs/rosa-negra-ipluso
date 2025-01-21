@@ -1,3 +1,5 @@
+import logging
+
 from app.views.index import IndexPage
 from app.views.products import ProductPage
 from app.views.cart import CartPage
@@ -8,7 +10,7 @@ from app.views.dashboard import DashboardPage
 from app.views.product_management import ProductManagementPage
 from app.views.user_management import UserManagementPage
 from app.views.purchase_management import PurchaseManagementPage
-import logging
+from app.views.add_wine import AddWinePage 
 
 class Router:
     """
@@ -45,9 +47,10 @@ class Router:
             "register": RegisterPage(self.app.content, self.app),
             "profile": ProfilePage(self.app.content, self.app),
             "dashboard": DashboardPage(self.app.content, self.app),
-            "product_management": ProductManagementPage(self.app.content),
+            "product_management": ProductManagementPage(self.app.content, self.app),
             "user_management": UserManagementPage(self.app.content),
             "purchase_management": PurchaseManagementPage(self.app.content),
+            "add_wine": AddWinePage(self.app.content, self.app),
         }
 
     def navigate_to(self, page_name):
@@ -99,3 +102,6 @@ class Router:
 
     def show_purchase_management_page(self):
         self.navigate_to("purchase_management")
+        
+    def show_add_wine_page(self):
+        self.navigate_to("add_wine")

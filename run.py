@@ -1,3 +1,4 @@
+from app.global_state import login_user
 from app.wine_app import create_app
 
 def main():
@@ -10,4 +11,5 @@ def main():
     app.mainloop()
 
 if __name__ == "__main__":
+    login_user(18, 'kalebe@gmail.com', '1234', 'admin')	
     main()
