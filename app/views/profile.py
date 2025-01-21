@@ -1,6 +1,9 @@
+from tkinter import messagebox
 import customtkinter as ctk
-from app.global_state import get_current_user_id, get_current_user_email, get_current_user_password, get_current_user_role
-from src.models.users import get_user_details_by_id, update_user_details
+
+from app.global_state import get_current_user_id, logout_user
+from src.models.users import delete_user, get_user_details_by_id, update_user_details
+from src.utils import is_of_age, validate_dob, validate_email, validate_required_fields, validate_vat_number
 
 class ProfilePage(ctk.CTkFrame):
     def __init__(self, master, app):
@@ -32,6 +35,22 @@ class ProfilePage(ctk.CTkFrame):
         )
         save_button.pack(pady=20)
 
+        # Botão para remover o usuário
+        delete_button = ctk.CTkButton(
+            self, 
+            text="Remover Usuário", 
+            command=self.delete_account,
+            font=("Arial", 12, "bold"),
+            fg_color="#FF6347",
+            hover_color="#FF4500",
+            text_color="#FFFFFF"
+        )
+        delete_button.pack(pady=10)
+        
+        # Label para exibir o status das modificações
+        self.status_label = ctk.CTkLabel(self, text="", font=("Arial", 12))
+        self.status_label.pack(pady=10)
+        
         # Carregar as informações do usuário
         self.load_user_details()
 
@@ -55,16 +74,57 @@ class ProfilePage(ctk.CTkFrame):
             self.address_2_entry.insert(0, user_details.get('address_2', ''))
 
     def save_changes(self):
+        name = self.name_entry.get()
+        email = self.email_entry.get()
+        dob = self.dob_entry.get()
+        password = self.password_entry.get()
+        vat_number = self.vat_number_entry.get()
+
+        # Verificar se todos os campos foram preenchidos usando a função validate_required_fields
+        if not validate_required_fields(name, email, dob, password):
+            self.status_label.configure(text="Todos os campos devem ser preenchidos!", text_color="gray")
+            return
+
+        # Validar o formato do email usando a função validate_email
+        if not validate_email(email):
+            self.status_label.configure(text="Email inválido!", text_color="gray")
+            return
+
+        # Validar o formato da data de nascimento usando a função validate_dob
+        if not validate_dob(dob):
+            self.status_label.configure(text="Data de nascimento inválida! Use AAAA-MM-DD.", text_color="gray")
+            return
+
+        # Verificar se a idade é menor que 18 anos usando a função is_of_age
+        if not is_of_age(dob, 18):
+            self.status_label.configure(text="Você deve ter pelo menos 18 anos para se registrar.", text_color="gray")
+            return
+        
+        # Validar o NIF usando a função validate_vat_number
+        if vat_number and not validate_vat_number(vat_number):
+            self.status_label.configure(text="Número de IVA inválido!", text_color="gray")
+            return
+
         user_id = get_current_user_id()
         updated_details = {
-            'name': self.name_entry.get(),
-            'dob': self.dob_entry.get(),
-            'email': self.email_entry.get(),
-            'password_hash': self.password_entry.get(),
-            'vat_number': self.vat_number_entry.get(),
+            'name': name,
+            'dob': dob,
+            'email': email,
+            'password_hash': password,
+            'vat_number': vat_number,
             'address_1': self.address_1_entry.get(),
             'address_2': self.address_2_entry.get(),
         }
         update_user_details(user_id, updated_details)
         self.app.header.update_header()
-        self.app.router.show_index_page()
+        self.status_label.configure(text="Alterações salvas com sucesso!", text_color="gray")
+
+    def delete_account(self):
+        confirm = messagebox.askyesno("Confirmação", "Tem certeza de que deseja excluir sua conta?")
+        if confirm:
+            user_id = get_current_user_id()
+            delete_user(user_id)
+            logout_user()
+            self.app.header.update_header()
+            self.app.router.show_login_page()
+            self.status_label.configure(text="Conta excluída com sucesso!", text_color="gray")

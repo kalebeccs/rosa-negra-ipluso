@@ -89,7 +89,6 @@ class LoginPage(ctk.CTkFrame):
         if verify_user_credentials(email, password):
             user_details = get_user_details(email)
             login_user(user_details['id'], email, password, user_details['role'])
-            self.status_label.configure(text="Login successful!", text_color="gray")
             # Atualizar o header após o login
             self.app.header.update_header()
             # Navegar para a página inicial ou outra página após o login
