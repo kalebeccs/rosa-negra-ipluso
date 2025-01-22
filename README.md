@@ -1,15 +1,28 @@
-<img src="app\assets\logo.png" width="170">
+<div align="center">
+   <img src="app\assets\logo.png" width="320">
+</div>
+<br>
 
-Rosa Negra iPluso is an interactive application for managing and exploring wines and bottles in a unique way. This project combines modern technology with the sophistication of the wine world, providing a rich and functional experience.
+Rosa Negra is an interactive application for managing and exploring wines and bottles in a unique way. This project combines modern technology with the sophistication of the wine world, providing a rich and functional experience.
+
+## 📋 Features
+
+- **Home Page**: Displays an introductory section with an image and text, followed by wine categories.
+- **Product Page**: Lists all available wines with detailed information.
+- **Cart Page**: Allows users to view and manage their selected wines.
+- **Login and Register Pages**: Provides user authentication and registration functionalities.
+- **Profile Page**: Displays user profile information.
+- **Dashboard**: Admin dashboard for managing products, users, and purchases.
+- **Product Management**: Allows admins to manage wine products.
 
 ## 🏗️ Technologies Used
 
 - **Python**: Main language for backend and logic.
 - **CustomTkinter**: Framework for modern graphical interfaces.
 - **Pillow (PIL)**: Image manipulation.
-- **Additional Libraries**: `bcrypt`, `darkdetect`, among others.
+- **Additional Libraries**: `bcrypt`, among others.
 
-## 🚀 Installation and Usage
+## 🛠️ Installation
 
 Follow the steps below to set up the project locally:
 
@@ -19,7 +32,7 @@ Follow the steps below to set up the project locally:
    ```
 2. Navigate to the project directory:
    ```sh
-   cd rosa-negra
+   cd rosa-negra-ipluso
    ```
 3. Create a virtual environment:
    ```sh
@@ -52,13 +65,17 @@ Follow the steps below to set up the project locally:
 ```plaintext
 rosa-negra-ipluso/
 ├── app/
-│   ├── wine_app.py       # Main application code
-│   ├── assets/           # Static images and resources
-├── requirements.txt      # Project dependencies
-├── run.py                # Script to run the application
-└── README.md             # Project documentation
+│   ├── assets/
+│   └── views/
+├── db/
+├── src/
+│   ├── models/
+│   └── utils/
+├── README.md
+├── requirements.txt
+└── run.py
 ```
 
-## Preview
+## 🖼️ Preview
 
 <img src="app/assets/preview.png">
