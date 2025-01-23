@@ -51,6 +51,10 @@ Follow the steps below to set up the project locally:
    ```sh
    pip install -r requirements.txt
    ```
+6. Initialize the database:
+   ```sh
+   python db/init_db.py
+   ```
 
 ## 🚀 Usage
 
